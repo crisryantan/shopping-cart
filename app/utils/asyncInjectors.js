@@ -12,12 +12,12 @@ import createReducer from 'reducers';
  */
 export function checkStore(store) {
   const shape = {
-    dispatch: isFunction,
-    subscribe: isFunction,
-    getState: isFunction,
-    replaceReducer: isFunction,
-    runSaga: isFunction,
-    asyncReducers: isObject,
+    dispatch       : isFunction,
+    subscribe      : isFunction,
+    getState       : isFunction,
+    replaceReducer : isFunction,
+    runSaga        : isFunction,
+    asyncReducers  : isObject,
   };
   invariant(
     conformsTo(store, shape),
@@ -72,7 +72,7 @@ export function getAsyncInjectors(store) {
   checkStore(store);
 
   return {
-    injectReducer: injectAsyncReducer(store, true),
-    injectSagas: injectAsyncSagas(store, true),
+    injectReducer : injectAsyncReducer(store, true),
+    injectSagas   : injectAsyncSagas(store, true),
   };
 }

@@ -1,8 +1,8 @@
 /**
  * Route Generator
  */
-const fs = require('fs');
-const path = require('path');
+const fs              = require('fs');
+const path            = require('path');
 const componentExists = require('../utils/componentExists');
 
 function reducerExists(comp) {
@@ -29,12 +29,12 @@ function trimTemplateFile(template) {
 }
 
 module.exports = {
-  description: 'Add a route',
-  prompts: [{
-    type: 'input',
-    name: 'component',
-    message: 'Which component should the route show?',
-    validate: (value) => {
+  description : 'Add a route',
+  prompts     : [{
+    type     : 'input',
+    name     : 'component',
+    message  : 'Which component should the route show?',
+    validate : (value) => {
       if ((/.+/).test(value)) {
         return componentExists(value) ? true : `"${value}" doesn't exist.`;
       }
@@ -42,11 +42,11 @@ module.exports = {
       return 'The path is required';
     },
   }, {
-    type: 'input',
-    name: 'path',
-    message: 'Enter the path of the route.',
-    default: '/about',
-    validate: (value) => {
+    type     : 'input',
+    name     : 'path',
+    message  : 'Enter the path of the route.',
+    default  : '/about',
+    validate : (value) => {
       if ((/.+/).test(value)) {
         return true;
       }
@@ -57,22 +57,22 @@ module.exports = {
 
   // Add the route to the routes.js file above the error route
   // TODO smarter route adding
-  actions: (data) => {
+  actions : (data) => {
     const actions = [];
     if (reducerExists(data.component)) {
       data.useSagas = sagasExists(data.component); // eslint-disable-line no-param-reassign
       actions.push({
-        type: 'modify',
-        path: '../../app/routes.js',
-        pattern: /(\s{\n\s{0,}path: '\*',)/g,
-        template: trimTemplateFile('routeWithReducer.hbs'),
+        type     : 'modify',
+        path     : '../../app/routes.js',
+        pattern  : /(\s{\n\s{0,}path: '\*',)/g,
+        template : trimTemplateFile('routeWithReducer.hbs'),
       });
     } else {
       actions.push({
-        type: 'modify',
-        path: '../../app/routes.js',
-        pattern: /(\s{\n\s{0,}path: '\*',)/g,
-        template: trimTemplateFile('route.hbs'),
+        type     : 'modify',
+        path     : '../../app/routes.js',
+        pattern  : /(\s{\n\s{0,}path: '\*',)/g,
+        template : trimTemplateFile('route.hbs'),
       });
     }
 

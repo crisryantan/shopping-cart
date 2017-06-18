@@ -11,12 +11,12 @@ const divider = chalk.gray('\n-----------------------------------');
 const logger = {
 
   // Called whenever there's an error on the server we want to print
-  error: (err) => {
+  error : (err) => {
     console.error(chalk.red(err));
   },
 
   // Called when express.js app starts on given port w/o errors
-  appStarted: (port, host, tunnelStarted) => {
+  appStarted : (port, host, tunnelStarted) => {
     console.log(`Server started ! ${chalk.green('✓')}`);
 
     // If the tunnel started, log that and the URL it's available at

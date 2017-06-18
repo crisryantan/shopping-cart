@@ -1,4 +1,5 @@
 import { injectGlobal } from 'styled-components';
+import 'semantic-ui-css/semantic.min.css';
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`

@@ -10,10 +10,10 @@ import configureStore from '../../../store';
 import { translationMessages } from '../../../i18n';
 
 const messages = defineMessages({
-  someMessage: {
-    id: 'some.id',
-    defaultMessage: 'This is some default message',
-    en: 'This is some en message',
+  someMessage : {
+    id             : 'some.id',
+    defaultMessage : 'This is some default message',
+    en             : 'This is some en message',
   },
 });
 

@@ -5,7 +5,7 @@ import { makeSelectLocationState } from 'containers/App/selectors';
 describe('makeSelectLocationState', () => {
   it('should select the route as a plain JS object', () => {
     const route = fromJS({
-      locationBeforeTransitions: null,
+      locationBeforeTransitions : null,
     });
     const mockedState = fromJS({
       route,
@@ -15,7 +15,7 @@ describe('makeSelectLocationState', () => {
 
   it('should return cached js routeState for same concurrent calls', () => {
     const route = fromJS({
-      locationBeforeTransitions: null,
+      locationBeforeTransitions : null,
     });
     const mockedState = fromJS({
       route,

@@ -9,16 +9,28 @@
  * the linting exception.
  */
 
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+import {
+  makeSelectFetching,
+  makeSelectFetchingSuccess,
+  makeSelectFetchingError,
+} from './selectors';
+
+export class HomePage extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div></div>
     );
   }
 }
+
+const mapStateToProps = createStructuredSelector({
+  fetching        : makeSelectFetching(),
+  fetchingSuccess : makeSelectFetchingSuccess(),
+  fetchingError   : makeSelectFetchingError(),
+});
+
+export default connect(mapStateToProps)(HomePage);

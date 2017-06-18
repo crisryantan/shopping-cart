@@ -16,19 +16,19 @@ import {
 
 // Fixtures
 
-const initialState = fromJS({ reduced: 'soon' });
+const initialState = fromJS({ reduced : 'soon' });
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'TEST':
+    case 'TEST' :
       return state.set('reduced', action.payload);
-    default:
+    default :
       return state;
   }
 };
 
 function* testSaga() {
-  yield put({ type: 'TEST', payload: 'yup' });
+  yield put({ type : 'TEST', payload : 'yup' });
 }
 
 const sagas = [
@@ -49,8 +49,8 @@ describe('asyncInjectors', () => {
       injectReducer('test', reducer);
       injectSagas(sagas);
 
-      const actual = store.getState().get('test');
-      const expected = initialState.merge({ reduced: 'yup' });
+      const actual   = store.getState().get('test');
+      const expected = initialState.merge({ reduced : 'yup' });
 
       expect(actual.toJS()).toEqual(expected.toJS());
     });
@@ -143,8 +143,8 @@ describe('asyncInjectors', () => {
 
         injectSagas(sagas);
 
-        const actual = store.getState().get('test');
-        const expected = initialState.merge({ reduced: 'yup' });
+        const actual   = store.getState().get('test');
+        const expected = initialState.merge({ reduced : 'yup' });
 
         expect(actual.toJS()).toEqual(expected.toJS());
       });

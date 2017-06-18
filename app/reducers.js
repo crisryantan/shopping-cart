@@ -19,7 +19,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
 // Initial routing state
 const routeInitialState = fromJS({
-  locationBeforeTransitions: null,
+  locationBeforeTransitions : null,
 });
 
 /**
@@ -28,9 +28,9 @@ const routeInitialState = fromJS({
 function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
     /* istanbul ignore next */
-    case LOCATION_CHANGE:
+    case LOCATION_CHANGE :
       return state.merge({
-        locationBeforeTransitions: action.payload,
+        locationBeforeTransitions : action.payload,
       });
     default:
       return state;
@@ -42,8 +42,8 @@ function routeReducer(state = routeInitialState, action) {
  */
 export default function createReducer(asyncReducers) {
   return combineReducers({
-    route: routeReducer,
-    language: languageProviderReducer,
+    route    : routeReducer,
+    language : languageProviderReducer,
     ...asyncReducers,
   });
 }
