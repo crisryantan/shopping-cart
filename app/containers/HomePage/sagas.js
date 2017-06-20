@@ -13,8 +13,8 @@ import {
 
 export function* getItems() {
   try {
-    const items = yield call(getRequest, 'products');
-    yield put(fetchItemSuccess(items));
+    const { data } = yield call(getRequest, 'products');
+    yield put(fetchItemSuccess(data));
   } catch (err) {
     yield put(fetchItemError(err));
   }

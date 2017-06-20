@@ -32,7 +32,7 @@ function homePageReducer(state = initialState, action) {
         .set('fetching', false)
         .set('fetchSuccess', true)
         .set('fetchError', false)
-        .set('items', action.items);
+        .set('items', fromJS(action.items));
 
     case FETCH_ITEMS_ERROR :
       return state

@@ -9,28 +9,55 @@
  * the linting exception.
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import ProductList from 'components/ProductList';
+
 import {
-  makeSelectFetching,
+  fetchItems,
+} from './actions';
+
+import {
+  makeSelectItems,
   makeSelectFetchingSuccess,
   makeSelectFetchingError,
 } from './selectors';
 
 export class HomePage extends Component { // eslint-disable-line react/prefer-stateless-function
+
+  componentWillMount() {
+    this.props.getItems();
+  }
+
   render() {
+    const { items, fetchingSuccess, fetchingError } = this.props;
     return (
-      <div></div>
+      <div>
+        <ProductList items={items} fetchingError={fetchingError} fetchingSuccess={fetchingSuccess} />
+      </div>
     );
   }
 }
 
+HomePage.propTypes = {
+  getItems        : PropTypes.func,
+  items           : PropTypes.array,
+  fetchingError   : PropTypes.bool,
+  fetchingSuccess : PropTypes.bool,
+};
+
 const mapStateToProps = createStructuredSelector({
-  fetching        : makeSelectFetching(),
+  items           : makeSelectItems(),
   fetchingSuccess : makeSelectFetchingSuccess(),
   fetchingError   : makeSelectFetchingError(),
 });
 
-export default connect(mapStateToProps)(HomePage);
+export function mapDispatchToProps(dispatch) {
+  return {
+    getItems : () => dispatch(fetchItems()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

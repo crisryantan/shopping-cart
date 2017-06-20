@@ -9,6 +9,11 @@ const selectHomePageDomain = (state) => state.get('homePage');
  * Other specific selectors
  */
 
+const makeSelectItems = () => createSelector(
+  selectHomePageDomain,
+  (substate) => substate.get('items').toJS()
+);
+
 const makeSelectFetching = () => createSelector(
   selectHomePageDomain,
   (substate) => substate.get('fetching')
@@ -26,6 +31,7 @@ const makeSelectFetchingError = () => createSelector(
 
 export {
   selectHomePageDomain,
+  makeSelectItems,
   makeSelectFetching,
   makeSelectFetchingSuccess,
   makeSelectFetchingError,
