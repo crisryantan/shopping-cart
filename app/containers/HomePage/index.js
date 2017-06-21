@@ -12,8 +12,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { Grid, Loader } from 'semantic-ui-react';
 
 import ProductList from 'components/ProductList';
+
+import { ContentWrapper } from './css';
 
 import {
   fetchItems,
@@ -33,10 +36,23 @@ export class HomePage extends Component { // eslint-disable-line react/prefer-st
 
   render() {
     const { items, fetchingSuccess, fetchingError } = this.props;
+
+    if (items.length && fetchingSuccess) {
+      return (
+        <ContentWrapper>
+          <Grid>
+            <Grid.Column width={10}>
+              <ProductList items={items} fetchingError={fetchingError} fetchingSuccess={fetchingSuccess} />
+            </Grid.Column>
+          </Grid>
+        </ContentWrapper>
+      );
+    }
+
     return (
-      <div>
-        <ProductList items={items} fetchingError={fetchingError} fetchingSuccess={fetchingSuccess} />
-      </div>
+      <ContentWrapper>
+        <Loader className="loading" size="large"></Loader>
+      </ContentWrapper>
     );
   }
 }

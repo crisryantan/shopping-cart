@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
+import { Grid } from 'semantic-ui-react';
 
 import ProductItem from 'components/ProductItem';
 
@@ -12,23 +13,19 @@ export class ProductList extends Component {
   }
 
   render() {
-    const { items, fetchingSuccess } = this.props;
-    if (items.length && fetchingSuccess) {
-      return (
-        <div>
-          { _.map(items, this.renderItem)}
-        </div>
-      );
-    }
+    const { items } = this.props;
     return (
-      <div>fetching..</div>
+      <Grid>
+        <Grid.Row>
+          { _.map(items, this.renderItem)}
+        </Grid.Row>
+      </Grid>
     );
   }
 }
 
 ProductList.propTypes = {
-  items           : PropTypes.array,
-  fetchingSuccess : PropTypes.bool,
+  items : PropTypes.array,
 };
 
 export default ProductList;
