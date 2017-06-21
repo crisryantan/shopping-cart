@@ -10,6 +10,7 @@ import {
   FETCH_ITEMS,
   FETCH_ITEMS_SUCCESS,
   FETCH_ITEMS_ERROR,
+  UPDATE_CART_ITEM,
 } from './constants';
 
 const initialState = fromJS({
@@ -39,6 +40,12 @@ function homePageReducer(state = initialState, action) {
         .set('fetching', false)
         .set('fetchSuccess', false)
         .set('fetchError', action.err);
+
+    case UPDATE_CART_ITEM :
+      return state
+        .set('items', state.get('items')
+          .map((item) => (item.get('id') === action.item.id) ? fromJS(action.item) : item)
+        );
 
     default:
       return state;

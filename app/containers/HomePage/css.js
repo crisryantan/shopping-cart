@@ -9,4 +9,11 @@ export const ContentWrapper = styled.div`
     align-items      : center;
     justify-content  : center;
   }
+
+  .shopping-cart {
+    position    : fixed;
+    top         : 20px;
+    right       : 0;
+    padding-top : 0px;
+  }
 `;

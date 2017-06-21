@@ -24,7 +24,13 @@ export class ProductItem extends Component {
             </Card.Content>
             <Card.Content extra>
               <div className="ui buttons">
-                <Button primary><Icon name="add square" />Add to cart</Button>
+                <Button
+                  onClick={() => this.props.addToCart(item)}
+                  disabled={item.stock < 1}
+                  primary
+                >
+                  <Icon name="add square" />Add to cart
+                </Button>
               </div>
             </Card.Content>
           </Card>
@@ -35,7 +41,8 @@ export class ProductItem extends Component {
 }
 
 ProductItem.propTypes = {
-  item : PropTypes.object,
+  item      : PropTypes.object,
+  addToCart : PropTypes.func,
 };
 
 export default ProductItem;

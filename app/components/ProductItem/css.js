@@ -4,7 +4,7 @@ export const ItemWrapper = styled.div`
   margin-bottom: 12px;
 
   .item-card {
-    min-height : 380px;
+    min-height : 400px;
   }
 
   .ui .buttons {

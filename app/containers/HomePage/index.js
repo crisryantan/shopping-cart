@@ -15,11 +15,13 @@ import { createStructuredSelector } from 'reselect';
 import { Grid, Loader } from 'semantic-ui-react';
 
 import ProductList from 'components/ProductList';
+import ShoppingCart from 'components/ShoppingCart';
 
 import { ContentWrapper } from './css';
 
 import {
   fetchItems,
+  updateCartItem,
 } from './actions';
 
 import {
@@ -35,14 +37,27 @@ export class HomePage extends Component { // eslint-disable-line react/prefer-st
   }
 
   render() {
-    const { items, fetchingSuccess, fetchingError } = this.props;
+    const {
+      addToCart,
+      items,
+      fetchingSuccess,
+      fetchingError,
+    } = this.props;
 
     if (items.length && fetchingSuccess) {
       return (
         <ContentWrapper>
           <Grid>
-            <Grid.Column width={10}>
-              <ProductList items={items} fetchingError={fetchingError} fetchingSuccess={fetchingSuccess} />
+            <Grid.Column width={11}>
+              <ProductList
+                addToCart={addToCart}
+                items={items}
+                fetchingError={fetchingError}
+                fetchingSuccess={fetchingSuccess}
+              />
+            </Grid.Column>
+            <Grid.Column width={5} className="shopping-cart">
+              <ShoppingCart items={items} />
             </Grid.Column>
           </Grid>
         </ContentWrapper>
@@ -58,6 +73,7 @@ export class HomePage extends Component { // eslint-disable-line react/prefer-st
 }
 
 HomePage.propTypes = {
+  addToCart       : PropTypes.func,
   getItems        : PropTypes.func,
   items           : PropTypes.array,
   fetchingError   : PropTypes.bool,
@@ -72,7 +88,25 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getItems : () => dispatch(fetchItems()),
+    getItems  : () => dispatch(fetchItems()),
+    addToCart : (item) => {
+      const currentItem = {
+        ...item,
+        inCart : true,
+      };
+
+      if (!Object.prototype.hasOwnProperty.call(currentItem, 'currentStock')) {
+        currentItem.stock       -= 1;
+        currentItem.currentStock = 1;
+      } else {
+        currentItem.stock        -= 1;
+        currentItem.currentStock += 1;
+      }
+
+      dispatch(updateCartItem({
+        ...currentItem,
+      }));
+    },
   };
 }
 

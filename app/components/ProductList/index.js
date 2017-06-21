@@ -6,9 +6,17 @@ import ProductItem from 'components/ProductItem';
 
 export class ProductList extends Component {
 
+  constructor(props) {
+    super(props);
+    this.renderItem = this.renderItem.bind(this);
+  }
+
   renderItem(item) {
     return (
-      <ProductItem item={item} key={item.id} />
+      <ProductItem
+        item={item}
+        key={item.id}
+        addToCart={this.props.addToCart} />
     );
   }
 
@@ -25,7 +33,8 @@ export class ProductList extends Component {
 }
 
 ProductList.propTypes = {
-  items : PropTypes.array,
+  addToCart : PropTypes.func,
+  items     : PropTypes.array,
 };
 
 export default ProductList;
