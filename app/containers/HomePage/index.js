@@ -39,6 +39,7 @@ export class HomePage extends Component { // eslint-disable-line react/prefer-st
   render() {
     const {
       addToCart,
+      removeToCart,
       items,
       fetchingSuccess,
       fetchingError,
@@ -48,7 +49,7 @@ export class HomePage extends Component { // eslint-disable-line react/prefer-st
       return (
         <ContentWrapper>
           <Grid>
-            <Grid.Column width={11}>
+            <Grid.Column width={10}>
               <ProductList
                 addToCart={addToCart}
                 items={items}
@@ -56,8 +57,11 @@ export class HomePage extends Component { // eslint-disable-line react/prefer-st
                 fetchingSuccess={fetchingSuccess}
               />
             </Grid.Column>
-            <Grid.Column width={5} className="shopping-cart">
-              <ShoppingCart items={items} />
+            <Grid.Column width={6} className="shopping-cart">
+              <ShoppingCart
+                items={items}
+                removeToCart={removeToCart}
+              />
             </Grid.Column>
           </Grid>
         </ContentWrapper>
@@ -74,6 +78,7 @@ export class HomePage extends Component { // eslint-disable-line react/prefer-st
 
 HomePage.propTypes = {
   addToCart       : PropTypes.func,
+  removeToCart    : PropTypes.func,
   getItems        : PropTypes.func,
   items           : PropTypes.array,
   fetchingError   : PropTypes.bool,
@@ -90,19 +95,22 @@ export function mapDispatchToProps(dispatch) {
   return {
     getItems  : () => dispatch(fetchItems()),
     addToCart : (item) => {
-      const currentItem = {
-        ...item,
-        inCart : true,
-      };
-
-      if (!Object.prototype.hasOwnProperty.call(currentItem, 'currentStock')) {
-        currentItem.stock       -= 1;
-        currentItem.currentStock = 1;
+      const currentItem = item;
+      if (!Object.prototype.hasOwnProperty.call(currentItem, 'cartQty')) {
+        currentItem.stock  -= 1;
+        currentItem.cartQty = 1;
       } else {
-        currentItem.stock        -= 1;
-        currentItem.currentStock += 1;
+        currentItem.stock   -= 1;
+        currentItem.cartQty += 1;
       }
-
+      dispatch(updateCartItem({
+        ...currentItem,
+      }));
+    },
+    removeToCart : (item) => {
+      const currentItem = item;
+      currentItem.stock   += currentItem.cartQty;
+      currentItem.cartQty = 0;
       dispatch(updateCartItem({
         ...currentItem,
       }));
