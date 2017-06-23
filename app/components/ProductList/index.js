@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { Grid } from 'semantic-ui-react';
 
 import ProductItem from 'components/ProductItem';
+import { ProductWrapper } from './css';
 
 export class ProductList extends Component {
 
@@ -13,10 +14,13 @@ export class ProductList extends Component {
 
   renderItem(item) {
     return (
-      <ProductItem
-        item={item}
-        key={item.id}
-        addToCart={this.props.addToCart} />
+      <ProductWrapper>
+        <ProductItem
+          item={item}
+          key={item.id}
+          addToCart={this.props.addToCart}
+        />
+      </ProductWrapper>
     );
   }
 

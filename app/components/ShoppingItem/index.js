@@ -8,19 +8,39 @@ export class ShoppingItem extends Component {
     const totalPrice = (price * item.cartQty).toFixed(2);
     return (
       <Grid>
-        <Grid.Column width={4}>
+        <Grid.Column
+          computer={4}
+          tablet={4}
+          mobile={8}
+        >
           { item.name }
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column
+          computer={3}
+          tablet={3}
+          mobile={3}
+        >
           { item.cartQty }
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column
+          computer={3}
+          tablet={2}
+          only="computer"
+        >
           { price }
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column
+          computer={3}
+          tablet={3}
+          only="computer"
+        >
           { totalPrice }
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column
+          computer={3}
+          tablet={4}
+          mobile={5}
+        >
           <Button
             onClick={() => this.props.removeToCart(item)}
             size="mini"

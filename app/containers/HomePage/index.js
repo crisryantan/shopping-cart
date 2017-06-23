@@ -49,7 +49,26 @@ export class HomePage extends Component { // eslint-disable-line react/prefer-st
       return (
         <ContentWrapper>
           <Grid>
-            <Grid.Column width={10}>
+            <Grid.Column
+              computer={8}
+              largeScreen={7}
+              tablet={8}
+              mobile={16}
+              className="shopping-cart"
+            >
+              <ShoppingCart
+                items={items}
+                removeToCart={removeToCart}
+              />
+            </Grid.Column>
+
+            <Grid.Column
+              computer={8}
+              largeScreen={9}
+              tablet={8}
+              mobile={16}
+              className="product-list"
+            >
               <ProductList
                 addToCart={addToCart}
                 items={items}
@@ -57,12 +76,7 @@ export class HomePage extends Component { // eslint-disable-line react/prefer-st
                 fetchingSuccess={fetchingSuccess}
               />
             </Grid.Column>
-            <Grid.Column width={6} className="shopping-cart">
-              <ShoppingCart
-                items={items}
-                removeToCart={removeToCart}
-              />
-            </Grid.Column>
+
           </Grid>
         </ContentWrapper>
       );

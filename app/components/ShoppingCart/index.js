@@ -44,17 +44,37 @@ export class ShoppingCart extends Component {
 
     return (
       <Grid.Row>
-        <Grid.Column width={4}>
+        <Grid.Column
+          computer={4}
+          tablet={4}
+          mobile={8}
+        >
           Total
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column
+          computer={3}
+          tablet={3}
+          mobile={3}
+        >
           {quantity}
         </Grid.Column>
-        <Grid.Column width={3} />
-        <Grid.Column width={3}>
+        <Grid.Column
+          computer={3}
+          tablet={2}
+          only="computer"
+        />
+        <Grid.Column
+          computer={3}
+          tablet={3}
+          only="computer"
+        >
           £{totalPrice}
         </Grid.Column>
-        <Grid.Column width={3} />
+        <Grid.Column
+          computer={3}
+          tablet={4}
+          mobile={5}
+        />
       </Grid.Row>
     );
   }
@@ -65,17 +85,37 @@ export class ShoppingCart extends Component {
       <Segment>
         <Grid>
           <Grid.Row>
-            <Grid.Column width={4} />
-            <Grid.Column width={3}>
+            <Grid.Column
+              computer={4}
+              tablet={4}
+              mobile={8}
+            />
+            <Grid.Column
+              computer={3}
+              tablet={3}
+              mobile={3}
+            >
               Quantity
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column
+              computer={3}
+              tablet={2}
+              only="computer"
+            >
               Price
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column
+              computer={3}
+              tablet={3}
+              only="computer"
+            >
               Total Price
             </Grid.Column>
-            <Grid.Column width={3} />
+            <Grid.Column
+              computer={3}
+              tablet={4}
+              mobile={5}
+            />
           </Grid.Row>
         </Grid>
         { _.map(items, this.renderItem)}

@@ -7,6 +7,10 @@ export const ItemWrapper = styled.div`
     min-height : 400px;
   }
 
+  .ui.card>.extra, .ui.cards>.card>.extra {
+     text-align : center;
+  }
+
   .ui .buttons {
     width : 100%;
   }

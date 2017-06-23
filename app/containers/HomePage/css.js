@@ -11,6 +11,21 @@ export const ContentWrapper = styled.div`
   }
 
   .shopping-cart {
-    position    : fixed;
+    position : absolute !important;
+    right    : 0;
+  }
+
+  .product-list {
+    position : absolute !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    .shopping-cart {
+      position : relative !important;
+    }
+
+    .product-list {
+      position : relative !important;
+    }
   }
 `;
